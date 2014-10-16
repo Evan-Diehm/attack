@@ -1,0 +1,18 @@
+label, input, select{
+	display:block;
+}
+
+#characterSelection{
+	width:210px;
+	margin:0 auto;
+	/*delete when ready*/
+	display: none;
+}
+
+#chapterOne{
+	/*display: none;*/
+}
+
+#level-up{
+	display: none;
+}

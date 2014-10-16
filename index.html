@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sexy bitches</title>
+		<link rel="stylesheet" href="style.css">
+		<script src="script.js"></script>
+		</script>
+	</head>
+	<body>
+		<div id="characterSelection">
+			<label for="character">Enter your Characters name</label>
+			<input type="text" id="characterName" required>
+			<label for="class">Select a class for your character</label>
+			<select  id="characterClass" required>
+				<option selected disabled>-Select acharacter</option>
+				<option value="mage">Mage</option>
+				<option value="warrior">Warrior</option>
+				<option value="ranger">Ranger</option>
+				<option value="monk">Monk</option>
+			</select>
+			<button type="button" id="characterCreate" onclick="characterCreation()">Proceed</button>
+		</div>	
+		<div id="attack">
+			<button type="button" onclick="attack()">Attack</button>
+		</div>
+
+		<div id="level-up">
+			<h1>Congradulations</h1>
+
+		</div>
+
+	</body>	
+</html>
