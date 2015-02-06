@@ -7,7 +7,7 @@
 		</script>
 	</head>
 	<body>
-		<div id="characterSelection">
+		<div id="characterSelection" class="hidden">
 			<label for="character">Enter your Characters name</label>
 			<input type="text" id="characterName" required>
 			<label for="class">Select a class for your character</label>
@@ -20,13 +20,17 @@
 			</select>
 			<button type="button" id="characterCreate" onclick="characterCreation()">Proceed</button>
 		</div>	
-		<div id="attack">
+		<div id="attack"s>
 			<button type="button" onclick="attack()">Attack</button>
 		</div>
 
-		<div id="level-up">
+		<div id="level-up" class="hidden">
 			<h1>Congradulations</h1>
 
+		</div>
+
+		<div id="dead" class="hidden">
+			<h1>You Died</h1>
 		</div>
 
 	</body>	
