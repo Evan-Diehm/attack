@@ -5,14 +5,10 @@ label, input, select{
 #characterSelection{
 	width:210px;
 	margin:0 auto;
-	/*delete when ready*/
-	display: none;
+	/*delete when ready
+	display: none;*/
 }
 
-#chapterOne{
-	/*display: none;*/
-}
-
-#level-up{
+.hidden{
 	display: none;
 }
