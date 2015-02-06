@@ -2,9 +2,9 @@
 var character = null;
 	characterClass = null;
 	charLvl = 1;
-	//set in enemycration();
 	charHealth = 10;
-	enemyHealth = 10;
+	//set in enemycration();
+	enemyHealth = null;
 function characterCreation(){
 	character = document.getElementById('characterName').value;
 	var	 charClass = document.getElementById('characterClass');
@@ -13,7 +13,14 @@ function characterCreation(){
 	//document.cookie = "character=" + characterName ;
 	
 	hide('characterSelection');
-	show('attack');
+	show('fight');
+}
+
+function createEnemy(){
+	enemyHealth = Math.floor(Math.random() * 20 + 10 );
+	document.getElementById("enemyHealth").innerText = enemyHealth ;
+
+	
 }
 
 function attack(){
@@ -22,12 +29,15 @@ function attack(){
 	if(youHit){
 		console.log("you hit");
 		var damage = Math.floor(Math.random() * 5 + 1);
-		console.log("damage=" + damage);
 		enemyHealth -= damage;
-		console.log("enemy Health=" + enemyHealth);
+
 		if(enemyHealth <= 0){
 			levelUp();
 		}
+
+		document.getElementById("combatLog").innerHTML = document.getElementById("combatLog").innerHTML + '<br>You hit the enemy for <span class="char">' + damage + ' </span> damage';
+	}else{
+		document.getElementById("combatLog").innerHTML = document.getElementById("combatLog").innerHTML + '<br>You missed'
 	}
 
 	if(enemyHealth > 0){
@@ -44,21 +54,23 @@ function defend(){
 	var enemyHit = Math.floor(Math.random() * 20);
 
 	if(enemyHit){
-		console.log("enemy hit");
 		var damage = Math.floor(Math.random() * 5 + 1);
-		charHealth -= charHealth;
+		charHealth -= damage;
+		document.getElementById("charHealth").innerText = charHealth ;
 		if(charHealth <= 0){
-			hide("attack");
+			hide("fight");
 			show("dead");
 		}
-
+		document.getElementById("combatLog").innerHTML = document.getElementById("combatLog").innerHTML + '<br>enmy hit you for <span class="char">' + damage + ' </span> damage';
+	}else{
+		document.getElementById("combatLog").innerHTML = document.getElementById("combatLog").innerHTML + '<br>enemy missed'
 	}
 
 }
 
 function levelUp(xp){
 	show("level-up");
-	hide("attack");
+	hide("fight");
 
 	charLvl = charLvl + 1;
 
@@ -74,3 +86,12 @@ function show (elementId) {
 function hide(elementId){
 	document.getElementById(elementId).classList.add("hidden");
 }
+
+
+
+
+
+
+createEnemy();
+
+enemyDiv = document.getElementById("charHealth").innerText = charHealth;

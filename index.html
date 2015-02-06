@@ -3,8 +3,6 @@
 	<head>
 		<title>Sexy bitches</title>
 		<link rel="stylesheet" href="style.css">
-		<script src="script.js"></script>
-		</script>
 	</head>
 	<body>
 		<div id="characterSelection" class="hidden">
@@ -20,8 +18,24 @@
 			</select>
 			<button type="button" id="characterCreate" onclick="characterCreation()">Proceed</button>
 		</div>	
-		<div id="attack"s>
-			<button type="button" onclick="attack()">Attack</button>
+		<div id="fight">
+			<div class="enemyContainer">
+				<p>enemy health</p>
+				<div id="enemyHealth"></div>
+			</div>
+			
+			<div class="charContainer">
+				<p>charictar health</p>
+				<div id="charHealth"></div>
+			</div>
+			
+			<div id="combatLog"></div>
+			
+			<div class="actionContainer">
+				<button type="button" onclick="attack()">Attack</button>
+				<button type="button" onclick="block()">block</button>
+			</div>
+			
 		</div>
 
 		<div id="level-up" class="hidden">
@@ -32,6 +46,6 @@
 		<div id="dead" class="hidden">
 			<h1>You Died</h1>
 		</div>
-
+		<script src="script.js"></script>
 	</body>	
 </html>

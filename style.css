@@ -9,6 +9,40 @@ label, input, select{
 	display: none;*/
 }
 
+
+.enemyContainer, .charContainer{
+	float: left;
+	width: 50%;
+	text-align: center;
+	overflow: auto;
+}
+
+.actionContainer{
+	margin-top: 20px;
+	text-align: center;
+	clear: both;
+}
+
+#fight{
+	width: 500px;
+	margin: 0 auto;
+}
+
+#combatLog{
+	text-align: center;
+	max-height: 90px;
+	clear: both;
+	overflow: auto;
+}
+
 .hidden{
 	display: none;
+}
+
+.enemy{
+	color: red;
+}
+
+.char{
+	color: green;
 }
