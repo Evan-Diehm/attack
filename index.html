@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Sexy bitches</title>
+		<title>Attack</title>
 		<link rel="stylesheet" href="build/css/style.css">
 	</head>
 	<body>
-		<div id="characterSelection" class="hidden">
-			<label for="character">Enter your Characters name</label>
-			<input type="text" id="characterName" required>
-			<label for="class">Select a class for your character</label>
-			<select  id="characterClass" required>
-				<option selected disabled>-Select acharacter</option>
-				<option value="mage">Mage</option>
-				<option value="warrior">Warrior</option>
-				<option value="ranger">Ranger</option>
-				<option value="monk">Monk</option>
-			</select>
-			<button type="button" id="characterCreate" onclick="characterCreation()">Proceed</button>
-		</div>	
-		<div id="fight">
-			<div class="enemyContainer">
-				<p>enemy health</p>
-				<div id="enemyHealth"></div>
+		<div class="container">
+			<!--<div id="characterSelection" class="hidden">
+				<label for="character">Enter your Characters name</label>
+				<input type="text" id="characterName" required>
+				<label for="class">Select a class for your character</label>
+				<select  id="characterClass" required>
+					<option selected disabled>-Select acharacter</option>
+					<option value="mage">Mage</option>
+					<option value="warrior">Warrior</option>
+					<option value="ranger">Ranger</option>
+					<option value="monk">Monk</option>
+				</select>
+				<button type="button" id="characterCreate" onclick="characterCreation()">Proceed</button>
+			</div>-->
+			<div id="fight">
+				<div class="enemyContainer">
+					<p>enemy health</p>
+					<div id="enemyHealth"></div>
+				</div>
+				
+				<div class="charContainer">
+					<p>charictar health</p>
+					<div id="charHealth"></div>
+				</div>
+				
+				<div id="combatLog"></div>
+				
+				<div class="actionContainer">
+					<button type="button" onclick="attack()">Attack</button>
+					<button type="button" onclick="block()">block</button>
+				</div>
+				
 			</div>
-			
-			<div class="charContainer">
-				<p>charictar health</p>
-				<div id="charHealth"></div>
+
+			<div id="level-up" class="hidden">
+				<h1>Congradulations</h1>
+
+				<button type="button" id="startFight" onclick="fight()">Fight</button>
+
 			</div>
-			
-			<div id="combatLog"></div>
-			
-			<div class="actionContainer">
-				<button type="button" onclick="attack()">Attack</button>
-				<button type="button" onclick="block()">block</button>
+
+			<div id="dead" class="hidden">
+				<h1>You Died</h1>
 			</div>
-			
-		</div>
-
-		<div id="level-up" class="hidden">
-			<h1>Congradulations</h1>
-
-		</div>
-
-		<div id="dead" class="hidden">
-			<h1>You Died</h1>
 		</div>
 		<script src="build/scripts/scripts.js"></script>
 	</body>	

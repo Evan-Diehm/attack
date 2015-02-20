@@ -1,8 +1,16 @@
+function fight(){
+	show("fight");
+	hide("level-up");
+	createEnemy();
+	document.getElementById("charHealth").innerText = charHealth;
+	document.getElementById("combatLog").innerHTML = " ";
+}
+
+
 function attack(){
 	var youHit = Math.floor(Math.random() * 2);
 
 	if(youHit){
-		console.log("you hit");
 		var damage = Math.floor(Math.random() * 5) + 1;
 		enemyHealth -= damage;
 
@@ -11,26 +19,26 @@ function attack(){
 		}
 
 		logCombat('You hit the enemy for <span class="char">' + damage + ' </span> damage');
-		document.getElementById("enemyHealth").innerText = charHealth;
+		document.getElementById("enemyHealth").innerText = enemyHealth;
 	}else{
 		logCombat('You missed');
 	}
 
 	if(enemyHealth > 0){
 		defend();
-	}	
+	}
 }
 
 
 function block(){
 	var block = Math.floor(Math.random() *2);
-	var heal = Math.floor(Math.random() * (charHealth / 3)) +1;
-	logCombat('you healed for' + heal);
-	charHealth = charHealth + heal;
-	if(charHealth > charMaxHealth){
-		charHealth = charMaxHealth;
+	var heal = Math.floor(Math.random() * (defender.maxHealth / 3)) + 1;
+	logCombat('you healed for <span class="char">' + heal + '</span>');
+	defender.health = defender.health + heal;
+	if(defender.health > defender.maxHealth){
+		defender.health = defender.maxHealth;
 	}
-	document.getElementById("charHealth").innerText = charHealth;
+	document.getElementById("charHealth").innerText = defender.health;
 	if(block){
 		logCombat('you successfully blocked your enemies attack');
 	}else{
@@ -41,13 +49,14 @@ function block(){
 }
 
 function defend(){
+	var defender = party[Math.floor(Math.random() * party.length)];
 	var enemyHit = Math.floor(Math.random() * 2);
 
 	if(enemyHit){
 		var damage = Math.floor(Math.random() * 5) + 1;
-		charHealth -= damage;
-		document.getElementById("charHealth").innerText = charHealth ;
-		if(charHealth <= 0){
+		defender.health -= damage;
+		document.getElementById("charHealth").innerText = defender.health ;
+		if(defender.health <= 0){
 			hide("fight");
 			show("dead");
 		}
@@ -56,17 +65,9 @@ function defend(){
 		logCombat('enemy missed');
 	}
 
-	document.getElementById("charHealth").innerText = charHealth;
+	document.getElementById("charHealth").innerText = defender.health;
 
 }
-
-function levelUp(xp){
-	show("level-up");
-	hide("fight");
-
-	charLvl = charLvl + 1;
-}
-
 
 function logCombat(action){
 
@@ -76,14 +77,10 @@ function logCombat(action){
 	combatLog.scrollTop = combatLog.scrollHeight;
 }
 
-function show (elementId) {
-	document.getElementById(elementId).classList.remove("hidden");
-}
 
-function hide(elementId){
-	document.getElementById(elementId).classList.add("hidden");
-}
 
 createEnemy();
 
-enemyDiv = document.getElementById("charHealth").innerText = charHealth;
+var god = new Character("Artomous", "druid", 1, 10, 10);
+party.push(god);
+document.getElementById("charHealth").innerText = party[0].health;
