@@ -1,21 +1,23 @@
 //set in characterCreation();
 var party = []
+	selectedParyMember;
 
-function Character(name, charClass, level, health, maxHealth){
-	this.name = name;
+function Character(charName, charClass, level, health, maxHealth){
+	this.charName = charName;
 	this.charClass = charClass;
 	this.level = level;
 	this.health = health;
 	this.maxHealth = maxHealth;
+	this.blocking = false;
 }
 
 function characterCreation(){
 	
-	var name = document.getElementById('characterName').value;
+	var charName = document.getElementById('characterName').value;
 	var	 charClass = document.getElementById('characterClass');
 	playerClass = charClass.options[charClass.selectedIndex].value;
 
-	var character = new Character(name, playerClass, 1, 10, 10);
+	var character = new Character(charName, playerClass, 1, 10, 10);
 
 	party.push(character);
 	//document.cookie = "character=" + characterName ;
@@ -51,9 +53,11 @@ function fight(){
 
 
 function attack(){
-	var youHit = Math.floor(Math.random() * 2);
-
-	if(youHit){
+	if(selectedParyMember.block ===true){
+		selectedParyMember.block = false;
+	}
+	var charHit = Math.floor(Math.random() * 2);
+	if(charHit){
 		var damage = Math.floor(Math.random() * 5) + 1;
 		enemyHealth -= damage;
 
@@ -73,10 +77,13 @@ function attack(){
 }
 
 
-function block(){
-	var block = Math.floor(Math.random() *2);
+function block(){;
+	var defender = selectedParyMember;
+	selectedParyMember.block = true;
+	//var block = Math.floor(Math.random() *2);
 	var heal = Math.floor(Math.random() * (defender.maxHealth / 3)) + 1;
-	logCombat('you healed for <span class="char">' + heal + '</span>');
+	logCombat(defender.charName + ' healed for <span class="char">' + heal + '</span>');
+
 	defender.health = defender.health + heal;
 	if(defender.health > defender.maxHealth){
 		defender.health = defender.maxHealth;
@@ -98,7 +105,7 @@ function defend(){
 	if(enemyHit){
 		var damage = Math.floor(Math.random() * 5) + 1;
 		defender.health -= damage;
-		document.getElementById("charHealth").innerText = defender.health ;
+		document.getElementById("charHealth").innerText = defender.health;
 		if(defender.health <= 0){
 			hide("fight");
 			show("dead");
@@ -127,6 +134,8 @@ createEnemy();
 var god = new Character("Artomous", "druid", 1, 10, 10);
 party.push(god);
 document.getElementById("charHealth").innerText = party[0].health;
+
+selectedParyMember = party[0];
 function show (elementId) {
 	document.getElementById(elementId).classList.remove("hidden");
 }

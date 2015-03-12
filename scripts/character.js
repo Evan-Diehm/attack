@@ -1,21 +1,23 @@
 //set in characterCreation();
 var party = []
+	selectedParyMember;
 
-function Character(name, charClass, level, health, maxHealth){
-	this.name = name;
+function Character(charName, charClass, level, health, maxHealth){
+	this.charName = charName;
 	this.charClass = charClass;
 	this.level = level;
 	this.health = health;
 	this.maxHealth = maxHealth;
+	this.blocking = false;
 }
 
 function characterCreation(){
 	
-	var name = document.getElementById('characterName').value;
+	var charName = document.getElementById('characterName').value;
 	var	 charClass = document.getElementById('characterClass');
 	playerClass = charClass.options[charClass.selectedIndex].value;
 
-	var character = new Character(name, playerClass, 1, 10, 10);
+	var character = new Character(charName, playerClass, 1, 10, 10);
 
 	party.push(character);
 	//document.cookie = "character=" + characterName ;
