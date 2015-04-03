@@ -1,7 +1,14 @@
+var party = [],
+	adversary = [],
+	selectedFighter,
+	initiativePosition = 0,
+	enemyHealth,
+	maleNameArray = ["Billy", "Jimmy", "Teddy", "Fred"],
+	femaleNameArray = ["Nancy","Jill", "Mary"],
+	classArray = ["Monk", "Mage", "Warrior", "Ranger"],
+	initiative = [],
+	god = new Character("Artomous", "druid", 1, 10, 10);
 //set in characterCreation();
-var party = []
-	selectedParyMember;
-
 function Character(charName, charClass, level, health, maxHealth){
 	this.charName = charName;
 	this.charClass = charClass;
@@ -29,32 +36,57 @@ function characterCreation(){
 function levelUp(xp){
 	show("level-up");
 	hide("fight");
+	var i = 0;
+	while(i < party.length){
+		party[i].charLvl = party[i].charLvl + 1;
+		party[i].maxHealth =party[i]. maxHealth + 5;
+		party[i].health = party[i].maxHealth;
+		i++;
+	}
 
-	charLvl = charLvl + 1;
-	charMaxHealth = charMaxHealth + 5;
-	charHealth = charMaxHealth;
-
+	createPartyMemeber();
 	document.getElementById("combatLog").innerHTML = " ";
 	document.getElementById("combatLog").innerText = " ";
 }
-var enemyHealth = null;
 function createEnemy(){
 	enemyHealth = Math.floor(Math.random() * (15 - 10 + 1)) + 10;
 
 	document.getElementById("enemyHealth").innerText = enemyHealth;
 }
-function fight(){
+function setupFight(){
+	displayParty();
 	show("fight");
 	hide("level-up");
 	createEnemy();
-	document.getElementById("charHealth").innerText = charHealth;
+	var i = 0;
+	while(i < party.length){
+		document.getElementById("charHealth").innerText = party[i].health;
+		i++;
+	}
+	
 	document.getElementById("combatLog").innerHTML = " ";
+}
+
+function fight(action ){
+	if(initiativePosition > initiative.length){
+		initiativePosition = 0;
+	}else{
+		initiativePosition++;
+	}
+	
+	selectedFighter = initiative[initiativePosition];
+
+	if(action == "attack"){
+		attack();
+	}else if(action == "block"){
+		block();
+	}
 }
 
 
 function attack(){
-	if(selectedParyMember.block ===true){
-		selectedParyMember.block = false;
+	if(selectedFighter.blocking ===true){
+		selectedFighter.blocking = false;
 	}
 	var charHit = Math.floor(Math.random() * 2);
 	if(charHit){
@@ -72,14 +104,15 @@ function attack(){
 	}
 
 	if(enemyHealth > 0){
-		defend();
+		fight();
 	}
 }
 
 
-function block(){;
-	var defender = selectedParyMember;
-	selectedParyMember.block = true;
+function block(){
+	console.log(selectedFighter);
+	var defender = selectedFighter;
+	selectedFighter.blocking = true;
 	//var block = Math.floor(Math.random() *2);
 	var heal = Math.floor(Math.random() * (defender.maxHealth / 3)) + 1;
 	logCombat(defender.charName + ' healed for <span class="char">' + heal + '</span>');
@@ -98,26 +131,26 @@ function block(){;
 	
 }
 
-function defend(){
-	var defender = party[Math.floor(Math.random() * party.length)];
-	var enemyHit = Math.floor(Math.random() * 2);
+// function defend(){
+// 	var defender = party[Math.floor(Math.random() * party.length)];
+// 	var enemyHit = Math.floor(Math.random() * 2);
 
-	if(enemyHit){
-		var damage = Math.floor(Math.random() * 5) + 1;
-		defender.health -= damage;
-		document.getElementById("charHealth").innerText = defender.health;
-		if(defender.health <= 0){
-			hide("fight");
-			show("dead");
-		}
-		logCombat('enmy hit you for <span class="char">' + damage + ' </span> damage');
-	}else{
-		logCombat('enemy missed');
-	}
+// 	if(enemyHit){
+// 		var damage = Math.floor(Math.random() * 5) + 1;
+// 		defender.health -= damage;
+// 		document.getElementById("charHealth").innerText = defender.health;
+// 		if(defender.health <= 0){
+// 			hide("fight");
+// 			show("dead");
+// 		}
+// 		logCombat('enmy hit you for <span class="char">' + damage + ' </span> damage');
+// 	}else{
+// 		logCombat('enemy missed');
+// 	}
 
-	document.getElementById("charHealth").innerText = defender.health;
+// 	document.getElementById("charHealth").innerText = defender.health;
 
-}
+// }
 
 function logCombat(action){
 
@@ -131,11 +164,34 @@ function logCombat(action){
 
 createEnemy();
 
-var god = new Character("Artomous", "druid", 1, 10, 10);
 party.push(god);
 document.getElementById("charHealth").innerText = party[0].health;
 
-selectedParyMember = party[0];
+//selectedFighter = party[0];
+function createPartyMember(){
+	
+	var gender	 = Math.floor(Math.random() * 2);
+	var charName;
+	if(gender){
+		charName = maleNameArray[Math.floor(Math.random() * maleNameArray.length)]
+	}else{
+		//charName femaleNameArray[Math.floor(Math.random() * femaleNameArray.length)]
+	}
+
+	var charClass = classArray[Math.floor(Math.random() * classArray.length)];
+	var charLevel = party[0].level;
+	var charHealth = party[0].maxHealth;
+	var charMaxHealth = party[0].maxHealth;
+	var charBlocking = false;
+
+
+	var character = new Character(charName, charClass, charLevel, charHealth, charMaxHealth, charBlocking);
+
+	party.push(character);
+	
+}
+
+
 function show (elementId) {
 	document.getElementById(elementId).classList.remove("hidden");
 }

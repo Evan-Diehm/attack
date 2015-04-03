@@ -1,7 +1,4 @@
 //set in characterCreation();
-var party = []
-	selectedParyMember;
-
 function Character(charName, charClass, level, health, maxHealth){
 	this.charName = charName;
 	this.charClass = charClass;
@@ -29,11 +26,15 @@ function characterCreation(){
 function levelUp(xp){
 	show("level-up");
 	hide("fight");
+	var i = 0;
+	while(i < party.length){
+		party[i].charLvl = party[i].charLvl + 1;
+		party[i].maxHealth =party[i]. maxHealth + 5;
+		party[i].health = party[i].maxHealth;
+		i++;
+	}
 
-	charLvl = charLvl + 1;
-	charMaxHealth = charMaxHealth + 5;
-	charHealth = charMaxHealth;
-
+	createPartyMemeber();
 	document.getElementById("combatLog").innerHTML = " ";
 	document.getElementById("combatLog").innerText = " ";
 }

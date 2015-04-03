@@ -1,5 +1,9 @@
 @import "scaffold.less";
 
+body{
+	background-color: @bodyBackground;
+}
+
 label, input, select{
 	display:block;
 }
@@ -13,10 +17,13 @@ label, input, select{
 
 
 .enemyContainer, .charContainer{
-	float: left;
+	// float: left;
+	margin: 10px auto;
 	width: 50%;
 	text-align: center;
 	overflow: auto;
+	background-color: @highlight;
+	border: 1px solid @black;
 }
 
 .actionContainer{
@@ -35,6 +42,16 @@ label, input, select{
 	max-height: 90px;
 	clear: both;
 	overflow: auto;
+	background-color: @white;
+	border: 1px solid @black;
+}
+
+#level-up{
+	text-align: center;
+}
+
+#dead{
+	text-align: center;
 }
 
 .hidden{
