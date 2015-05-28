@@ -1,40 +1,39 @@
 //set in characterCreation();
 function Character(charName, charClass, level, health, maxHealth){
-	this.charName = charName;
+	this.charBlocking = false;
 	this.charClass = charClass;
-	this.level = level;
-	this.health = health;
-	this.maxHealth = maxHealth;
-	this.blocking = false;
+	this.charHealth = health;
+	this.charLevel = level;
+	this.charName = charName;
+	this.charMaxHealth = maxHealth;
 }
 
-function characterCreation(){
+// function characterCreation(){
 	
-	var charName = document.getElementById('characterName').value;
-	var	 charClass = document.getElementById('characterClass');
-	playerClass = charClass.options[charClass.selectedIndex].value;
+// 	var charName = document.getElementById('characterName').value;
+// 	var	 charClass = document.getElementById('characterClass');
+// 	playerClass = charClass.options[charClass.selectedIndex].value;
 
-	var character = new Character(charName, playerClass, 1, 10, 10);
+// 	var character = new Character(charName, playerClass, 1, 10, 10);
 
-	party.push(character);
-	//document.cookie = "character=" + characterName ;
+// 	party.push(character);
+// 	//document.cookie = "character=" + characterName ;
 	
-	hide('characterSelection');
-	show('fight');
-}
+// 	hide('characterSelection');
+// 	show('fight');
+// }
 
-function levelUp(xp){
+function levelUp(){
 	show("level-up");
 	hide("fight");
-	var i = 0;
-	while(i < party.length){
-		party[i].charLvl = party[i].charLvl + 1;
-		party[i].maxHealth =party[i]. maxHealth + 5;
-		party[i].health = party[i].maxHealth;
-		i++;
+	for(var i = 0; i < party.length; i++){
+		party[i].charLevel = party[i].charLevel + 1;
+		console.log(party[i].charLevel);
+		party[i].charMaxHealth =party[i].charMaxHealth + 5;
+		party[i].charHealth = party[i].charMaxHealth;
 	}
 
-	createPartyMemeber();
+	createPartyMember();
 	document.getElementById("combatLog").innerHTML = " ";
 	document.getElementById("combatLog").innerText = " ";
 }

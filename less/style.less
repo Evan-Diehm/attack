@@ -8,6 +8,18 @@ label, input, select{
 	display:block;
 }
 
+
+.clearfix {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
 #characterSelection{
 	width:210px;
 	margin:0 auto;
@@ -15,15 +27,19 @@ label, input, select{
 	display: none;*/
 }
 
+#partyContainer, #hostileContainer{
+	text-align: center
+}
+
 
 .enemyContainer, .charContainer{
-	// float: left;
-	margin: 10px auto;
-	width: 50%;
-	text-align: center;
-	overflow: auto;
 	background-color: @highlight;
 	border: 1px solid @black;
+	display: inline-block;
+	margin: 10px 5%;
+	overflow: auto;
+	text-align: center;
+	width: 39%;	
 }
 
 .actionContainer{

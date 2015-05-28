@@ -3,11 +3,6 @@ function setupFight(){
 	show("fight");
 	hide("level-up");
 	createEnemy();
-	var i = 0;
-	while(i < party.length){
-		document.getElementById("charHealth").innerText = party[i].health;
-		i++;
-	}
 	
 	document.getElementById("combatLog").innerHTML = " ";
 }
@@ -30,9 +25,9 @@ function fight(action ){
 
 
 function attack(){
-	if(selectedFighter.blocking ===true){
-		selectedFighter.blocking = false;
-	}
+	// if(selectedFighter.blocking ===true){
+	// 	selectedFighter.blocking = false;
+	// }
 	var charHit = Math.floor(Math.random() * 2);
 	if(charHit){
 		var damage = Math.floor(Math.random() * 5) + 1;
@@ -110,6 +105,6 @@ function logCombat(action){
 createEnemy();
 
 party.push(god);
-document.getElementById("charHealth").innerText = party[0].health;
+setupFight();
 
 //selectedFighter = party[0];

@@ -20,17 +20,16 @@
 				<button type="button" id="characterCreate" onclick="characterCreation()">Proceed</button>
 			</div>-->
 			<div id="fight">
-				<div class="enemyContainer">
-					<p>enemy health</p>
-					<div id="enemyHealth"></div>
+				<div id="hostileContainer">
+					<div class="enemyContainer">
+						<p>enemy health</p>
+						<div id="enemyHealth"></div>
+					</div>
 				</div>
 				
 				<div id="combatLog"></div>
-
-				<div class="charContainer">
-					<p>charictar health</p>
-					<div id="charHealth"></div>
-				</div>
+				
+				<div id="partyContainer" class="clearfix"></div>
 				
 				<div class="actionContainer">
 					<button type="button" onclick="fight('attack')">Attack</button>

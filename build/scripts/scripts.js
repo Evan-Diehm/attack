@@ -10,41 +10,40 @@ var party = [],
 	god = new Character("Artomous", "druid", 1, 10, 10);
 //set in characterCreation();
 function Character(charName, charClass, level, health, maxHealth){
-	this.charName = charName;
+	this.charBlocking = false;
 	this.charClass = charClass;
-	this.level = level;
-	this.health = health;
-	this.maxHealth = maxHealth;
-	this.blocking = false;
+	this.charHealth = health;
+	this.charLevel = level;
+	this.charName = charName;
+	this.charMaxHealth = maxHealth;
 }
 
-function characterCreation(){
+// function characterCreation(){
 	
-	var charName = document.getElementById('characterName').value;
-	var	 charClass = document.getElementById('characterClass');
-	playerClass = charClass.options[charClass.selectedIndex].value;
+// 	var charName = document.getElementById('characterName').value;
+// 	var	 charClass = document.getElementById('characterClass');
+// 	playerClass = charClass.options[charClass.selectedIndex].value;
 
-	var character = new Character(charName, playerClass, 1, 10, 10);
+// 	var character = new Character(charName, playerClass, 1, 10, 10);
 
-	party.push(character);
-	//document.cookie = "character=" + characterName ;
+// 	party.push(character);
+// 	//document.cookie = "character=" + characterName ;
 	
-	hide('characterSelection');
-	show('fight');
-}
+// 	hide('characterSelection');
+// 	show('fight');
+// }
 
-function levelUp(xp){
+function levelUp(){
 	show("level-up");
 	hide("fight");
-	var i = 0;
-	while(i < party.length){
-		party[i].charLvl = party[i].charLvl + 1;
-		party[i].maxHealth =party[i]. maxHealth + 5;
-		party[i].health = party[i].maxHealth;
-		i++;
+	for(var i = 0; i < party.length; i++){
+		party[i].charLevel = party[i].charLevel + 1;
+		console.log(party[i].charLevel);
+		party[i].charMaxHealth =party[i].charMaxHealth + 5;
+		party[i].charHealth = party[i].charMaxHealth;
 	}
 
-	createPartyMemeber();
+	createPartyMember();
 	document.getElementById("combatLog").innerHTML = " ";
 	document.getElementById("combatLog").innerText = " ";
 }
@@ -58,11 +57,6 @@ function setupFight(){
 	show("fight");
 	hide("level-up");
 	createEnemy();
-	var i = 0;
-	while(i < party.length){
-		document.getElementById("charHealth").innerText = party[i].health;
-		i++;
-	}
 	
 	document.getElementById("combatLog").innerHTML = " ";
 }
@@ -85,9 +79,9 @@ function fight(action ){
 
 
 function attack(){
-	if(selectedFighter.blocking ===true){
-		selectedFighter.blocking = false;
-	}
+	// if(selectedFighter.blocking ===true){
+	// 	selectedFighter.blocking = false;
+	// }
 	var charHit = Math.floor(Math.random() * 2);
 	if(charHit){
 		var damage = Math.floor(Math.random() * 5) + 1;
@@ -165,7 +159,7 @@ function logCombat(action){
 createEnemy();
 
 party.push(god);
-document.getElementById("charHealth").innerText = party[0].health;
+setupFight();
 
 //selectedFighter = party[0];
 function createPartyMember(){
@@ -175,14 +169,14 @@ function createPartyMember(){
 	if(gender){
 		charName = maleNameArray[Math.floor(Math.random() * maleNameArray.length)]
 	}else{
-		//charName femaleNameArray[Math.floor(Math.random() * femaleNameArray.length)]
+		charName = femaleNameArray[Math.floor(Math.random() * femaleNameArray.length)]
 	}
 
-	var charClass = classArray[Math.floor(Math.random() * classArray.length)];
-	var charLevel = party[0].level;
-	var charHealth = party[0].maxHealth;
-	var charMaxHealth = party[0].maxHealth;
-	var charBlocking = false;
+	var charBlocking = false
+		charClass = classArray[Math.floor(Math.random() * classArray.length)];
+		charHealth = party[0].charMaxHealth
+		charLevel = party[0].charLevel		
+		charMaxHealth = party[0].charMaxHealth;
 
 
 	var character = new Character(charName, charClass, charLevel, charHealth, charMaxHealth, charBlocking);
@@ -191,7 +185,35 @@ function createPartyMember(){
 	
 }
 
+function displayParty(){
+	var partyContainer = document.getElementById('partyContainer')
+	partyContainer.innerHTML  = "";
+	for(var i = 0; i < party.length; i++){
+		console.log(party[i].charHealth);
+		console.log(party[i].charName);
 
+		var charHealth = document.createElement('div')
+			charName = document.createElement('h2')
+			charNode = document.createTextNode(party[i].charName)
+			div = document.createElement('div')
+			pnode = document.createTextNode(party[i].charHealth);
+
+		
+
+		charHealth.className = 'charHealth';
+		charName.className = 'charName';
+		div.className = 'charContainer';
+		
+
+		
+		charHealth.appendChild(pnode);
+		charName.appendChild(charNode); 
+		div.appendChild(charName);
+		div.appendChild(charHealth);
+		partyContainer.appendChild(div);
+
+	}
+}
 function show (elementId) {
 	document.getElementById(elementId).classList.remove("hidden");
 }
