@@ -8,14 +8,15 @@ function createPartyMember(){
 		charName = femaleNameArray[Math.floor(Math.random() * femaleNameArray.length)]
 	}
 
-	var charBlocking = false
-		charClass = classArray[Math.floor(Math.random() * classArray.length)];
+	var charClass = classArray[Math.floor(Math.random() * classArray.length)];
 		charHealth = party[0].charMaxHealth
 		charLevel = party[0].charLevel		
-		charMaxHealth = party[0].charMaxHealth;
+		charMaxHealth = party[0].charMaxHealth
+		charSpeed = Math.floor(Math.random() * 5);
+		alegance = "party",
+		charId = makeId();
 
-
-	var character = new Character(charName, charClass, charLevel, charHealth, charMaxHealth, charBlocking);
+	var character = new Character(charId, charName, charClass, charLevel, charHealth, charMaxHealth, charSpeed, alegance );
 
 	party.push(character);
 	
@@ -25,8 +26,6 @@ function displayParty(){
 	var partyContainer = document.getElementById('partyContainer')
 	partyContainer.innerHTML  = "";
 	for(var i = 0; i < party.length; i++){
-		console.log(party[i].charHealth);
-		console.log(party[i].charName);
 
 		var charHealth = document.createElement('div')
 			charName = document.createElement('h2')
@@ -37,6 +36,7 @@ function displayParty(){
 		
 
 		charHealth.className = 'charHealth';
+		charHealth.id = party[i].charId + "Health";
 		charName.className = 'charName';
 		div.className = 'charContainer';
 		

@@ -1,27 +1,15 @@
 //set in characterCreation();
-function Character(charName, charClass, level, health, maxHealth){
+function Character(charId, charName, charClass, level, health, maxHealth, speed, alegance){
+	this.alegance = alegance;
 	this.charBlocking = false;
 	this.charClass = charClass;
 	this.charHealth = health;
 	this.charLevel = level;
 	this.charName = charName;
 	this.charMaxHealth = maxHealth;
+	this.charSpeed = speed;
+	this.charId = charId;
 }
-
-// function characterCreation(){
-	
-// 	var charName = document.getElementById('characterName').value;
-// 	var	 charClass = document.getElementById('characterClass');
-// 	playerClass = charClass.options[charClass.selectedIndex].value;
-
-// 	var character = new Character(charName, playerClass, 1, 10, 10);
-
-// 	party.push(character);
-// 	//document.cookie = "character=" + characterName ;
-	
-// 	hide('characterSelection');
-// 	show('fight');
-// }
 
 function levelUp(){
 	show("level-up");
